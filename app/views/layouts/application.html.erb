@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello Domains</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'https://make-it-nice.dnsimple.com/css/dnsimple-tachyons-1.0.0.min.css' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="navigation" class="dn-navbar pa3 mb4">
+      <div class="dn-navbar-branding">
+        Hello Domains
+      </div>
+      <div class="dn-navbar-nav">
+        <% if signed_in? %>
+          <%= current_user.email %> |
+          <%= link_to 'Sign out', '/auth/dnsimple' %>
+        <% else %>
+          <%= link_to 'Sign in', '/auth/dnsimple' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="container">
+      <%= yield %>
+    </div>
+    <div class="dn-footer ph3">
+      &copy; <%= link_to "DNSimple", "https://dnsimple.com" %> | <%= link_to "Source Code", "https://github.com/dnsimple/hello-domains-rails" %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+set -o errexit
+IFS=$'\n\t'
+
+DNSIMPLE_CLIENT_ID="${1:?[ERROR] Please provide DNSimple client ID}"
+DNSIMPLE_CLIENT_SECRET="${2:?[ERROR] Please provide DNSimple client secret}"
+
+install_gems() {
+  echo "[Hello Domains] Installing gems.."
+  echo ""
+
+  bundle install
+}
+
+setup_env_vars() {
+  echo "[Hello Domains] Setting up env vars.."
+  echo ""
+
+  local template=.env.example
+  local target=.env
+
+  sed \
+    -e "s/\${dnsimple_client_id}/$DNSIMPLE_CLIENT_ID/" \
+    -e "s/\${dnsimple_client_secret}/$DNSIMPLE_CLIENT_SECRET/" \
+    $template > $target
+
+}
+
+prepare_databases() {
+  echo "[Hello Domains] Preparing database.."
+
+  cp config/database.yml.example config/database.yml
+  bin/rails db:setup
+  bin/rails log:clear tmp:clear
+}
+
+main() {
+  install_gems
+  setup_env_vars
+  prepare_databases
+}
+
+main
