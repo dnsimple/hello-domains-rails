@@ -16,10 +16,10 @@ The OAuth Application has a `Client ID` and a `Client Secret` that you should us
 To setup this project, please use the following commands:
 
 ```shell
-➜ git clone https://github.com/dnsimple/hello-domains-hanami.git
-➜ cd hello-domains-hanami
+➜ git clone https://github.com/dnsimple/hello-domains-rails.git
+➜ cd hello-domains-rails
 ➜ ./bin/setup [DNSIMPLE_CLIENT_ID] [DNSIMPLE_CLIENT_SECRET]
-➜ bundle exec hanami server # visit http://localhost:3000
+➜ bundle exec rails s # visit http://localhost:3000
 ```
 
 ## Testing
