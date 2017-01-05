@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   def index
     if signed_in?
-      client = Dnsimple::Client.new(base_url: "https://api.sandbox.dnsimple.com", access_token: current_user.token)
+      client = Dnsimple::Client.new(base_url: ENV['DNSIMPLE_BASE_URL'], access_token: current_user.token)
       @domains = client.domains.list_domains(current_user.uid).data
     end
   end
